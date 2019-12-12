@@ -28,7 +28,7 @@
 
       function runServerCode()
       {
-        var socket = io(); // TIP: io() with no args does auto-discovery
+        var socket = io("https://comp20final.herokuapp.com/"); // TIP: io() with no args does auto-discovery
         var stringZipcode = document.getElementById("valueNeeded").value;
 
         var obj;
