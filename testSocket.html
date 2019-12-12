@@ -50,9 +50,10 @@
           //find way to insert that into api string to get currect zip
           socket.emit('test', stringZipcode, function(serverObj)
           {
-            console.log("hitting test")
+            //console.log("hitting test")
               //console.log(stringZipcode);
               testString = serverObj;
+              console.log(testString);
               //console.log(testString)
               obj = JSON.parse(testString);
               document.getElementById("server-temp").innerHTML = obj.list[0].main.temp;
