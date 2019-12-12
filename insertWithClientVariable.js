@@ -1,6 +1,8 @@
 const {MongoClient} = require('mongodb');
 const express = require('express');
 const socketIO = require('socket.io');
+const PORT = process.env.PORT || 3000;
+const INDEX = '/testSocket.html';
 
 /*const PORT =  process.env.PORT || 3000;
 const INDEX = '/testSocket.html';
@@ -165,8 +167,8 @@ async function main()
     try 
     {
 
-        const PORT =  await process.env.PORT || 3000;
-        const INDEX = '/testSocket.html';
+        //const PORT =  await process.env.PORT || 3000;
+        //const INDEX = '/testSocket.html';
 
         const server =  await express()
           .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
