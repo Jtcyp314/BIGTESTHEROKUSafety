@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+
+
+
+    <input id = "valueNeeded" type="text" name="zip">
+    <input type="submit" name="Submit" onclick="runServerCode(), runServerCode()">
+    <p id="server-temp"></p>
+    <p id="server-weather"></p>
+    <p id="server-name"></p>
+    <script>
+      /*let socket = io();
+      let el;
+
+      socket.on('test', (timeString) => {
+        console.log(timeString);
+      });
+      
+      socket.on('time', (timeString) => {
+        el = document.getElementById('server-time');
+        el.innerHTML = 'Server time: ' + timeString;
+      });*/
+
+
+
+      function runServerCode()
+      {
+        var socket = io(); // TIP: io() with no args does auto-discovery
+        var stringZipcode = document.getElementById("valueNeeded").value;
+
+        var obj;
+        console.log(stringZipcode);
+
+
+/*        socket.on('zip', function()
+        {
+          });
+        });*/
+
+
+        socket.on('connect', function () 
+        { 
+            socket.emit('setZip', stringZipcode, function()
+          {
+          });
+
+          //find way to insert that into api string to get currect zip
+          socket.emit('test', stringZipcode, function(serverObj)
+          {
+            console.log("hitting test")
+              //console.log(stringZipcode);
+              testString = serverObj;
+              //console.log(testString)
+              obj = JSON.parse(testString);
+              document.getElementById("server-temp").innerHTML = obj.list[0].main.temp;
+              document.getElementById("server-weather").innerHTML = obj.list[0].weather[0].description
+              document.getElementById("server-name").innerHTML = obj.city.name;
+/*              document.write(obj.list[0].main.temp);
+              document.write(obj.list[0].weather[0].description);
+              document.write(obj.city.name)*/
+          });
+
+
+  // TIP: you can avoid listening on `connect` and listen on events directly too!
+//    socket.emit('test', 'hello world', function (word) 
+//    { // args are sent in order to acknowledgement function
+//      console.log(word); // data will be 'tobi says woot'
+//    });
+
+/*    socket.emit('ferret', 'tobi', 'woot', function (data) 
+    { // args are sent in order to acknowledgement function
+      console.log(data); // data will be 'tobi says woot'
+    });*/
+
+  });
+      }
+
+//messageToPrint = obj.message;
+
+//console.log(obj.message);
+
+    </script>
+  </body>
+</html>
